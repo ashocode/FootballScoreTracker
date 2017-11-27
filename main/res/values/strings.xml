@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Football score tracker</string>
+    <string name="team_a_name">Team A</string>
+    <string name="team_b_name">Team B</string>
+    <string name="score">score</string>
+    <string name="starting_value_zero">0</string>
+    <string name="fouls">fouls</string>
+    <string name="cards">cards</string>
+    <string name="goal">goal</string>
+    <string name="foul">foul</string>
+    <string name="yellow">yellow</string>
+    <string name="red">red</string>
+    <string name="score_separator">:</string>
+    <string name="undo">undo</string>
+    <string name="reset">reset</string>
+</resources>
