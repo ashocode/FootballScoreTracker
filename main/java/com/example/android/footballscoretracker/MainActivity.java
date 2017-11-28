@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> lastChange = new ArrayList<>();
     private int lastChangePosition = -1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /*
+    This section takes care of displaying the the values in the UI.
+    */
+    
     private void displayScoreA(int score) {
         TextView scoreView = (TextView) findViewById(R.id.score_team_a);
         scoreView.setText(String.valueOf(score));
@@ -69,11 +73,19 @@ public class MainActivity extends AppCompatActivity {
         scoreView.setText(String.valueOf(redCards));
     }
 
+    /*
+    This method saves the view id of the last button pressed by the user. Used for "undo".
+    */
+    
     private void saveLastChange(int viewID) {
         lastChange.add(viewID);
         lastChangePosition++;
     }
 
+    /*
+    This section takes care of incrementing and displaying the the values in the UI after a button is pressed.
+    */
+    
     public void scoreGoal(View view) {
         int viewID = view.getId();
 
@@ -126,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
         saveLastChange(viewID);
     }
 
+    /*
+    This method handles the "undo" operation. Depending on the action view ID the corresponding value is decreased by one and the entry is removed from the list.
+    */
+    
     public void undo(View view) {
         int changeViewID = 0;
         if (lastChangePosition >= 0) {
@@ -163,6 +179,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+    This method resets all values.
+    */
+    
     public void resetAll(View view) {
         scoreTeamA = 0;
         scoreTeamB = 0;
