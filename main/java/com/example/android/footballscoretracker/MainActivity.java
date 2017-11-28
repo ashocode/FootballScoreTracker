@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             yellowCardsTeamA = savedInstanceState.getInt("StateYellowCardsTeamA");
             yellowCardsTeamB = savedInstanceState.getInt("StateYellowCardsTeamB");
             redCardsTeamA = savedInstanceState.getInt("StateRedCardsTeamA");
-            redCardsTeamB = savedInstanceState.getInt("StateRedCardsTeamA");
+            redCardsTeamB = savedInstanceState.getInt("StateRedCardsTeamB");
             lastChange = savedInstanceState.getIntegerArrayList("StateLastChange");
             lastChangePosition = savedInstanceState.getInt("StateLastChangePosition");
         }
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putInt("StateYellowCardsTeamA",yellowCardsTeamA);
         savedInstanceState.putInt("StateYellowCardsTeamB",yellowCardsTeamB);
         savedInstanceState.putInt("StateRedCardsTeamA",redCardsTeamA);
-        savedInstanceState.putInt("StateRedCardsTeamA",redCardsTeamB);
+        savedInstanceState.putInt("StateRedCardsTeamB",redCardsTeamB);
         savedInstanceState.putIntegerArrayList("StateLastChange", (ArrayList<Integer>)lastChange);
         savedInstanceState.putInt("StateLastChangePosition",lastChangePosition);
     }
