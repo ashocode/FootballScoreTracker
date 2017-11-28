@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,14 +26,55 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null) {
+            scoreTeamA = savedInstanceState.getInt("StateScoreA");
+            scoreTeamB = savedInstanceState.getInt("StateScoreB");
+            foulsTeamA = savedInstanceState.getInt("StateFoulsTeamA");
+            foulsTeamB = savedInstanceState.getInt("StateFoulsTeamB");
+            yellowCardsTeamA = savedInstanceState.getInt("StateYellowCardsTeamA");
+            yellowCardsTeamB = savedInstanceState.getInt("StateYellowCardsTeamB");
+            redCardsTeamA = savedInstanceState.getInt("StateRedCardsTeamA");
+            redCardsTeamB = savedInstanceState.getInt("StateRedCardsTeamA");
+            lastChange = savedInstanceState.getIntegerArrayList("StateLastChange");
+            lastChangePosition = savedInstanceState.getInt("StateLastChangePosition");
+        }
+
+        displayScoreA(scoreTeamA);
+        displayScoreB(scoreTeamB);
+        displayFoulsA(foulsTeamA);
+        displayFoulsB(foulsTeamB);
+        displayYellowCardsA(yellowCardsTeamA);
+        displayYellowCardsB(yellowCardsTeamB);
+        displayRedCardsA(redCardsTeamA);
+        displayRedCardsB(redCardsTeamB);
+    }
+
+    /*
+    This method is saving the current state, so it can be used upon rotation of the screen.
+    */
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putInt("StateScoreA", scoreTeamA);
+        savedInstanceState.putInt("StateScoreB",scoreTeamB);
+        savedInstanceState.putInt("StateFoulsTeamA",foulsTeamA);
+        savedInstanceState.putInt("StateFoulsTeamB",foulsTeamB);
+        savedInstanceState.putInt("StateYellowCardsTeamA",yellowCardsTeamA);
+        savedInstanceState.putInt("StateYellowCardsTeamB",yellowCardsTeamB);
+        savedInstanceState.putInt("StateRedCardsTeamA",redCardsTeamA);
+        savedInstanceState.putInt("StateRedCardsTeamA",redCardsTeamB);
+        savedInstanceState.putIntegerArrayList("StateLastChange", (ArrayList<Integer>)lastChange);
+        savedInstanceState.putInt("StateLastChangePosition",lastChangePosition);
     }
 
     /*
     This section takes care of displaying the the values in the UI.
     */
-    
+
     private void displayScoreA(int score) {
         TextView scoreView = (TextView) findViewById(R.id.score_team_a);
         scoreView.setText(String.valueOf(score));
@@ -76,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This method saves the view id of the last button pressed by the user. Used for "undo".
     */
-    
+
     private void saveLastChange(int viewID) {
         lastChange.add(viewID);
         lastChangePosition++;
@@ -85,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This section takes care of incrementing and displaying the the values in the UI after a button is pressed.
     */
-    
+
     public void scoreGoal(View view) {
         int viewID = view.getId();
 
@@ -141,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This method handles the "undo" operation. Depending on the action view ID the corresponding value is decreased by one and the entry is removed from the list.
     */
-    
+
     public void undo(View view) {
         int changeViewID = 0;
         if (lastChangePosition >= 0) {
@@ -182,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This method resets all values.
     */
-    
+
     public void resetAll(View view) {
         scoreTeamA = 0;
         scoreTeamB = 0;
