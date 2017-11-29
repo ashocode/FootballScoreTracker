@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,48 +38,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if (savedInstanceState != null) {
-            scoreTeamA = savedInstanceState.getInt("StateScoreA");
-            scoreTeamB = savedInstanceState.getInt("StateScoreB");
-            foulsTeamA = savedInstanceState.getInt("StateFoulsTeamA");
-            foulsTeamB = savedInstanceState.getInt("StateFoulsTeamB");
-            yellowCardsTeamA = savedInstanceState.getInt("StateYellowCardsTeamA");
-            yellowCardsTeamB = savedInstanceState.getInt("StateYellowCardsTeamB");
-            redCardsTeamA = savedInstanceState.getInt("StateRedCardsTeamA");
-            redCardsTeamB = savedInstanceState.getInt("StateRedCardsTeamB");
-            lastChange = savedInstanceState.getIntegerArrayList("StateLastChange");
-            lastChangePosition = savedInstanceState.getInt("StateLastChangePosition");
-        }
-
-        displayScoreA(scoreTeamA);
-        displayScoreB(scoreTeamB);
-        displayFoulsA(foulsTeamA);
-        displayFoulsB(foulsTeamB);
-        displayYellowCardsA(yellowCardsTeamA);
-        displayYellowCardsB(yellowCardsTeamB);
-        displayRedCardsA(redCardsTeamA);
-        displayRedCardsB(redCardsTeamB);
-    }
-
-    /*
-    This method is saving the current state, so it can be used upon rotation of the screen.
-    */
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-
-        savedInstanceState.putInt("StateScoreA", scoreTeamA);
-        savedInstanceState.putInt("StateScoreB",scoreTeamB);
-        savedInstanceState.putInt("StateFoulsTeamA",foulsTeamA);
-        savedInstanceState.putInt("StateFoulsTeamB",foulsTeamB);
-        savedInstanceState.putInt("StateYellowCardsTeamA",yellowCardsTeamA);
-        savedInstanceState.putInt("StateYellowCardsTeamB",yellowCardsTeamB);
-        savedInstanceState.putInt("StateRedCardsTeamA",redCardsTeamA);
-        savedInstanceState.putInt("StateRedCardsTeamB",redCardsTeamB);
-        savedInstanceState.putIntegerArrayList("StateLastChange", (ArrayList<Integer>)lastChange);
-        savedInstanceState.putInt("StateLastChangePosition",lastChangePosition);
     }
 
     /*
