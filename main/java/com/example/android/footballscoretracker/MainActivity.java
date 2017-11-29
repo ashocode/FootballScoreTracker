@@ -4,11 +4,23 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String KEY_SCORE_A = "StateScoreA";
+    private static final String KEY_SCORE_B = "StateScoreB";
+    private static final String KEY_FOULS_A = "StateFoulsTeamA";
+    private static final String KEY_FOULS_B = "StateFoulsTeamB";
+    private static final String KEY_YELLOW_A = "StateYellowCardsTeamA";
+    private static final String KEY_YELLOW_B = "StateYellowCardsTeamB";
+    private static final String KEY_RED_A = "StateRedCardsTeamA";
+    private static final String KEY_RED_B = "StateRedCardsTeamB";
+    private static final String KEY_LAST_CHANGE_LIST = "StateLastChange";
+    private static final String KEY_LAST_CHANGE_POSITION = "StateLastChangePosition";
 
     private int scoreTeamA = 0;
     private int scoreTeamB = 0;
@@ -25,14 +37,60 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+    }
+
+    /*
+    This method is restoring the saved state in key-value pairs.
+    */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+
+        scoreTeamA = savedInstanceState.getInt(KEY_SCORE_A);
+        scoreTeamB = savedInstanceState.getInt(KEY_SCORE_B);
+        foulsTeamA = savedInstanceState.getInt(KEY_FOULS_A);
+        foulsTeamB = savedInstanceState.getInt(KEY_FOULS_B);
+        yellowCardsTeamA = savedInstanceState.getInt(KEY_YELLOW_A);
+        yellowCardsTeamB = savedInstanceState.getInt(KEY_YELLOW_B);
+        redCardsTeamA = savedInstanceState.getInt(KEY_RED_A);
+        redCardsTeamB = savedInstanceState.getInt(KEY_RED_B);
+        lastChange = savedInstanceState.getIntegerArrayList(KEY_LAST_CHANGE_LIST);
+        lastChangePosition = savedInstanceState.getInt(KEY_LAST_CHANGE_POSITION);
+
+        displayScoreA(scoreTeamA);
+        displayScoreB(scoreTeamB);
+        displayFoulsA(foulsTeamA);
+        displayFoulsB(foulsTeamB);
+        displayYellowCardsA(yellowCardsTeamA);
+        displayYellowCardsB(yellowCardsTeamB);
+        displayRedCardsA(redCardsTeamA);
+        displayRedCardsB(redCardsTeamB);
+    }
+
+    /*
+    This method is saving the current state, so it can be used upon rotation of the screen.
+    */
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putInt(KEY_SCORE_A, scoreTeamA);
+        savedInstanceState.putInt(KEY_SCORE_B,scoreTeamB);
+        savedInstanceState.putInt(KEY_FOULS_A,foulsTeamA);
+        savedInstanceState.putInt(KEY_FOULS_B,foulsTeamB);
+        savedInstanceState.putInt(KEY_YELLOW_A,yellowCardsTeamA);
+        savedInstanceState.putInt(KEY_YELLOW_B,yellowCardsTeamB);
+        savedInstanceState.putInt(KEY_RED_A,redCardsTeamA);
+        savedInstanceState.putInt(KEY_RED_B,redCardsTeamB);
+        savedInstanceState.putIntegerArrayList(KEY_LAST_CHANGE_LIST,(ArrayList<Integer>)lastChange);
+        savedInstanceState.putInt(KEY_LAST_CHANGE_POSITION,lastChangePosition);
     }
 
     /*
     This section takes care of displaying the the values in the UI.
     */
-    
+
     private void displayScoreA(int score) {
         TextView scoreView = (TextView) findViewById(R.id.score_team_a);
         scoreView.setText(String.valueOf(score));
@@ -76,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This method saves the view id of the last button pressed by the user. Used for "undo".
     */
-    
+
     private void saveLastChange(int viewID) {
         lastChange.add(viewID);
         lastChangePosition++;
@@ -85,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This section takes care of incrementing and displaying the the values in the UI after a button is pressed.
     */
-    
+
     public void scoreGoal(View view) {
         int viewID = view.getId();
 
@@ -141,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This method handles the "undo" operation. Depending on the action view ID the corresponding value is decreased by one and the entry is removed from the list.
     */
-    
+
     public void undo(View view) {
         int changeViewID = 0;
         if (lastChangePosition >= 0) {
@@ -182,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     This method resets all values.
     */
-    
+
     public void resetAll(View view) {
         scoreTeamA = 0;
         scoreTeamB = 0;
