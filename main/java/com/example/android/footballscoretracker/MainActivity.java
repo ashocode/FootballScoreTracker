@@ -4,12 +4,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String KEY_SCORE_A = "StateScoreA";
+    private static final String KEY_SCORE_B = "StateScoreB";
+    private static final String KEY_FOULS_A = "StateFoulsTeamA";
+    private static final String KEY_FOULS_B = "StateFoulsTeamB";
+    private static final String KEY_YELLOW_A = "StateYellowCardsTeamA";
+    private static final String KEY_YELLOW_B = "StateYellowCardsTeamB";
+    private static final String KEY_RED_A = "StateRedCardsTeamA";
+    private static final String KEY_RED_B = "StateRedCardsTeamB";
+    private static final String KEY_LAST_CHANGE_LIST = "StateLastChange";
+    private static final String KEY_LAST_CHANGE_POSITION = "StateLastChangePosition";
 
     private int scoreTeamA = 0;
     private int scoreTeamB = 0;
@@ -69,6 +81,53 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putInt("StateRedCardsTeamB",redCardsTeamB);
         savedInstanceState.putIntegerArrayList("StateLastChange", (ArrayList<Integer>)lastChange);
         savedInstanceState.putInt("StateLastChangePosition",lastChangePosition);
+    }
+
+    /*
+    This method is restoring the saved state in key-value pairs.
+    */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+
+        scoreTeamA = savedInstanceState.getInt(KEY_SCORE_A);
+        scoreTeamB = savedInstanceState.getInt(KEY_SCORE_B);
+        foulsTeamA = savedInstanceState.getInt(KEY_FOULS_A);
+        foulsTeamB = savedInstanceState.getInt(KEY_FOULS_B);
+        yellowCardsTeamA = savedInstanceState.getInt(KEY_YELLOW_A);
+        yellowCardsTeamB = savedInstanceState.getInt(KEY_YELLOW_B);
+        redCardsTeamA = savedInstanceState.getInt(KEY_RED_A);
+        redCardsTeamB = savedInstanceState.getInt(KEY_RED_B);
+        lastChange = savedInstanceState.getIntegerArrayList(KEY_LAST_CHANGE_LIST);
+        lastChangePosition = savedInstanceState.getInt(KEY_LAST_CHANGE_POSITION);
+
+        displayScoreA(scoreTeamA);
+        displayScoreB(scoreTeamB);
+        displayFoulsA(foulsTeamA);
+        displayFoulsB(foulsTeamB);
+        displayYellowCardsA(yellowCardsTeamA);
+        displayYellowCardsB(yellowCardsTeamB);
+        displayRedCardsA(redCardsTeamA);
+        displayRedCardsB(redCardsTeamB);
+    }
+
+    /*
+    This method is saving the current state, so it can be used upon rotation of the screen.
+    */
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putInt(KEY_SCORE_A, scoreTeamA);
+        savedInstanceState.putInt(KEY_SCORE_B,scoreTeamB);
+        savedInstanceState.putInt(KEY_FOULS_A,foulsTeamA);
+        savedInstanceState.putInt(KEY_FOULS_B,foulsTeamB);
+        savedInstanceState.putInt(KEY_YELLOW_A,yellowCardsTeamA);
+        savedInstanceState.putInt(KEY_YELLOW_B,yellowCardsTeamB);
+        savedInstanceState.putInt(KEY_RED_A,redCardsTeamA);
+        savedInstanceState.putInt(KEY_RED_B,redCardsTeamB);
+        savedInstanceState.putIntegerArrayList(KEY_LAST_CHANGE_LIST,(ArrayList<Integer>)lastChange);
+        savedInstanceState.putInt(KEY_LAST_CHANGE_POSITION,lastChangePosition);
     }
 
     /*
