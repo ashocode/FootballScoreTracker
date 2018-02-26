@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="yellow_text_color">#FFC107</color>
+    <color name="yellow_card_color">#FFEB3B</color>
+    <color name="red_card_color">#FF1744</color>
+    <color name="tint_color">#70000000</color>
+    <color name="button_tint_color">#9901579B</color>
 </resources>

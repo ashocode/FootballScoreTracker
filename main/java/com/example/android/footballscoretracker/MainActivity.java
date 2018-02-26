@@ -234,7 +234,6 @@ public class MainActivity extends AppCompatActivity {
             lastChange.remove(lastChangePosition);
             lastChangePosition--;
         }
-
     }
 
     /*
